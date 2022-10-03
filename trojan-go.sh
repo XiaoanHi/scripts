@@ -30,21 +30,21 @@ fi
 # 以下网站是随机从Google上找到的无广告小说网站，不喜欢请改成其他网址，以http或https开头
 # 搭建好后无法打开伪装域名，可能是反代小说网站挂了，请在网站留言，或者Github发issue，以便替换新的网站
 SITES=(
-http://www.zhuizishu.com/
-http://xs.56dyc.com/
+#http://www.zhuizishu.com/
+#http://xs.56dyc.com/
 #http://www.xiaoshuosk.com/
 #https://www.quledu.net/
-http://www.ddxsku.com/
+#http://www.ddxsku.com/
 http://www.biqu6.com/
-https://www.wenshulou.cc/
+#https://www.wenshulou.cc/
 #http://www.auutea.com/
 http://www.55shuba.com/
-http://www.39shubao.com/
+#http://www.39shubao.com/
 https://www.23xsw.cc/
 #https://www.huanbige.com/
-https://www.jueshitangmen.info/
-https://www.zhetian.org/
-http://www.bequgexs.com/
+#https://www.jueshitangmen.info/
+#https://www.zhetian.org/
+#http://www.bequgexs.com/
 http://www.tjwl.com/
 )
 
@@ -292,7 +292,9 @@ getData() {
                 index=`shuf -i0-${len} -n1`
                 PROXY_URL=${SITES[$index]}
                 host=`echo ${PROXY_URL} | cut -d/ -f3`
-                ip=`curl -sL https://hijk.art/hostip.php?d=${host}`
+#                ip=`curl -sL https://hijk.art/hostip.php?d=${host}`
+                ip=`ping ${DOMAIN} -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
+                colorEcho $BLUE " 获取到ip：$ip"
                 res=`echo -n ${ip} | grep ${host}`
                 if [[ "${res}" = "" ]]; then
                     echo "$ip $host" >> /etc/hosts
@@ -421,12 +423,12 @@ getCert() {
             systemctl start cron
             systemctl enable cron
         fi
-        curl -sL https://get.acme.sh | sh -s email=hijk.pw@protonmail.ch
+        curl -sL https://get.acme.sh | sh -s email=2318414890@qq.com
         source ~/.bashrc
         ~/.acme.sh/acme.sh  --upgrade  --auto-upgrade
         ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
         if [[ "$BT" = "false" ]]; then
-            ~/.acme.sh/acme.sh   --issue -d $DOMAIN --keylength ec-256 --pre-hook "systemctl stop nginx" --post-hook "systemctl restart nginx"  --standalone
+            ~/.acme.sh/acme.sh   --issue -d $DOMAIN --keylength ec-256 --pre-hook "systemctl stop nginx" --post-hook "systemctl restart nginx"  --standalone --force
         else
             ~/.acme.sh/acme.sh   --issue -d $DOMAIN --keylength ec-256 --pre-hook "nginx -s stop || { echo -n ''; }" --post-hook "nginx -c /www/server/nginx/conf/nginx.conf || { echo -n ''; }"  --standalone
         fi
