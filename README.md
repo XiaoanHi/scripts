@@ -1,5 +1,7 @@
 # 网络跳越一键脚本
 
+搬瓦工补货限量版-$49.99 CN2 GIA-E ：https://goo.su/K6vo
+
 官网：<https://v2raytech.com>
 
 论坛：<https://hijk.club>
