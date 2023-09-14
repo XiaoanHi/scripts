@@ -6,5 +6,5 @@
 优惠码：BWHNCXNVXV
 
 搬瓦工 CN2 GIA-E 10G 限量版套餐补货！$49 美元/年，1 核 CPU ，512MB 内存，10GB SSD 硬盘，500GB 流量，可选 DC6 CN2 GIA-E 、DC9 CN2 GIA 、日本软银、荷兰联通 9929 等机房。
-购买链接 ：https://goo.su/K6vo
+购买链接 ：[https://goo.su/6xJz4](https://goo.su/6xJz4)
 
